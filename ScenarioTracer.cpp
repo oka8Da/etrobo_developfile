@@ -125,12 +125,13 @@ void ScenarioTracer::execWalking() {
 void ScenarioTracer::execTest(){
     //mLineTracer->run();
     //変更
-    if(mLineTracer->ToLineTracer_8() == true && SumDistance > 500.0){
+    if(mLineTracer->ToLineTracer_8() == true){ //&& SumDistance > 500.0){
         printf("LineTracer_8に移行します\n");
         mState = LINETRACER_8;
     }
 
     //追加（岡田）
+    /*
     SumDistance = ScenarioTracer::calSumDistance();
     if(0 <= SumDistance && SumDistance < 282){
         printf("直進加速中\n");
@@ -152,9 +153,9 @@ void ScenarioTracer::execTest(){
         printf("通常走行に戻ります\n");
         mLineTracer->run_so_fast(false,0);
     }
-
+    */
     
-    //mLineTracer->run(false,0);     		// ② do アクティビティ
+    mLineTracer->run_fast(false,0);     		// ② do アクティビティ
     
     //mTest->run();
 }
@@ -170,7 +171,7 @@ void ScenarioTracer::execLineTracer_8() {
 //追加
 void ScenarioTracer::execTest2() {
     printf("TEST2をよびだしてます。\n");
-    mLineTracer->run_fast(true,0); //8の字超えた後            		// ② do アクティビティ
+    mLineTracer->run(true,0); //8の字超えた後            		// ② do アクティビティ
 
     /*if (mSimpleTimer->isTimedOut()) {   // ② イベントチェック
         mSimpleTimer->stop();   		// ② exit アクション

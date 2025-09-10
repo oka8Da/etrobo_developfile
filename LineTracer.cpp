@@ -92,7 +92,7 @@ void LineTracer::run_fast(bool TurnSign,float TurnControl){//高速走行用
 
     float diffReflection = mLineMonitor-> calDiffReflection();
 
-    float turn = mPIDControl -> calcPropValue(diffReflection);//高速走行用のPID制御
+    float turn = mPIDControl -> calcPropValue_fast(diffReflection);//高速走行用のPID制御
     
     if(TurnSign == true){//符号を変更するか
         printf("左ライン走行です\n");
@@ -115,7 +115,7 @@ void LineTracer::run_so_fast(bool TurnSign,float TurnControl){//高速走行用
 
     float diffReflection = mLineMonitor-> calDiffReflection();
 
-    float turn = mPIDControl -> calcPropValue_fast(diffReflection);//高速走行用のPID制御
+    float turn = mPIDControl -> calcPropValue_so_fast(diffReflection);//高速走行用のPID制御
     
     if(TurnSign == true){//符号を変更するか
         printf("左ライン走行です\n");

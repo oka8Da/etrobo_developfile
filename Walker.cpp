@@ -53,8 +53,8 @@ void Walker::run_fast() {
 
 //tuika(okada)
 void Walker::run_so_fast() {
-    mLeftWheel.setPower(pwm + 40 - mTurn); 
-    mRightWheel.setPower(pwm + 40 + mTurn);
+    mLeftWheel.setPower(pwm + 45 - mTurn); 
+    mRightWheel.setPower(pwm + 45 + mTurn);
     printf("mLeftWheel:%d\n",pwm+40-mTurn);
     printf("mRightWheel:%d\n",pwm+40+mTurn);
     

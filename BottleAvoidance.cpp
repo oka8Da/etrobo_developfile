@@ -57,7 +57,7 @@ void BottleAvoidance::Avoid(){
     }
 
     //その場で旋回
-    mTurnControl = BottleAvoidance::turnControl(0.0,6.0,40.0);
+    mTurnControl = BottleAvoidance::turnControl(0.0,6.0,50.0);
     printf("%.2f",mTurnControl);
     if(mTurnControl > 0.0){
         mWalker->setCommand(mTurnControl);
@@ -66,24 +66,20 @@ void BottleAvoidance::Avoid(){
     }
 
     if(mTurnControl == 0.0){//turnControlの返り値はdifdistanceがfinishdistanceを超えてから0を返し続ける       
-        if(6.0 < diffDistance && diffDistance <= 25.0){//前進させたい距離
+        if(6.0 < diffDistance && diffDistance <= 27.0){//前進させたい距離
             mWalker->turn(50,50);
             printf("\ntyokusinntyuu");
         }
 
-        else if(25.0 < diffDistance && diffDistance <=46.0){//後進させたい距離
+        else if(27.0 < diffDistance && diffDistance <=52.0){//後進させたい距離
             mWalker->turn(-50,-50);//関数名がややこしいが、後進させている
             printf("\nkousinntyuu");
 
         } 
 
-        else if(46.0 < diffDistance && diffDistance <= 51.0){//ライントレースできる位置まで持っていってあげる
+        else if(52.0 < diffDistance && diffDistance <= 56.0){//ライントレースできる位置まで持っていってあげる
             mWalker->turn(60,-60);
          
-        }
-        
-        else if(51.0 < diffDistance && diffDistance <= 51.5){
-            mWalker->turn(60,60);
             
         } else {    
             mScenarioTransition = true;//senarioをLINETRACER2に遷移

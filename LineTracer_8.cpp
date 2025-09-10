@@ -52,7 +52,7 @@ void LineTracer_8::run_8(){
                 break;
     case 2:     
                 
-                mTurnControl = LineTracer_8::turnControl(1.0,8.0,-15.0);  
+                mTurnControl = LineTracer_8::turnControl(0.1,2.0,6.0);  
                 
                 mTurnSign = true;
                 mLineTracer->run_fast(mTurnSign,mTurnControl);
@@ -62,7 +62,7 @@ void LineTracer_8::run_8(){
                 //切り替えあり、左に切り替え,mTurnの符号を変える
                 break;
     case 3:         
-                mTurnControl = LineTracer_8::turnControl(0.5,7.5,13.0);  
+                mTurnControl = LineTracer_8::turnControl(0.1,2.0,-11.0);  
                 mTurnSign = false;
                 mLineTracer->run_fast(mTurnSign,mTurnControl);
                 

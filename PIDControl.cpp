@@ -33,8 +33,8 @@ PIDControl::PIDControl()
  * 走行体の操作量を計算する
  * @param diffBrightness ラインから外れた度合い（ライン閾値との差）
  */
- //pid seigyo no p
-float PIDControl::calcPropValue(float diffBrightness) {//diffが入る
+
+float PIDControl::calcPropValue(float diffBrightness) {//run用のPID制御値計算
 
     //追加：微分計算:D制御
     float currentDiff = diffBrightness;
@@ -54,14 +54,41 @@ float PIDControl::calcPropValue(float diffBrightness) {//diffが入る
 
 
     //PID制御計算
-    float turn =((PIDControl::Kp * diffBrightness) * 1.75) + ((PIDControl::Kp * derivative) * 3.0) + ((PIDControl::Kp * sumDiff) * 0.003) + PIDControl::bias;
+    float turn =((PIDControl::Kp * diffBrightness) * 1.3) + ((PIDControl::Kp * derivative) * 3.0) + ((PIDControl::Kp * sumDiff) * 0.001) + PIDControl::bias;
+	//pwm:30                                         1.3                                     3.0                                  0.001
+    return turn;
+}
+
+
+
+float PIDControl::calcPropValue_fast(float diffBrightness) {//run_fast() to run_8 younoPIDseigyotikeisann
+
+    //追加：微分計算:D制御
+    float currentDiff = diffBrightness;
+    derivative = currentDiff-previousDiff;
+    previousDiff = currentDiff;
+    printf("derivative:%.2f\n",derivative);
+
+    //追加:積分計算:I制御:diffかderivativeどっちがいいか
+    if(derivative > 5){//変化率が大きい場合だけ加算
+      sumDiff = sumDiff - derivative * 0.1;
+    }
+    else if(derivative < -5){
+      sumDiff = sumDiff + derivative * 0.1;
+    }
+    
+    printf("sumDiff:%.2f\n",sumDiff);
+
+
+    //PID制御計算
+    float turn =((PIDControl::Kp * diffBrightness) * 2.0) + ((PIDControl::Kp * derivative) * 3.3) + ((PIDControl::Kp * sumDiff) * 0.003) + PIDControl::bias;
 	
     return turn;
 }
 
 
 
-float PIDControl::calcPropValue_fast(float diffBrightness) {//run_fast用のPID制御値計算
+float PIDControl::calcPropValue_so_fast(float diffBrightness) {//run_so_fast用のPID制御値計算
 
     //追加：微分計算:D制御
     float currentDiff = diffBrightness;
@@ -81,7 +108,7 @@ float PIDControl::calcPropValue_fast(float diffBrightness) {//run_fast用のPID�
 
 
     //PID制御計算
-    float turn =((PIDControl::Kp * diffBrightness) * 1.3) + ((PIDControl::Kp * derivative) * 3.0) + ((PIDControl::Kp * sumDiff) * 0.003) + PIDControl::bias;
+    float turn =((PIDControl::Kp * diffBrightness) * 1.5) + ((PIDControl::Kp * derivative) * 3.0) + ((PIDControl::Kp * sumDiff) * 0.003) + PIDControl::bias;
 	//pwm:60                                         1.3                                     3.0                                  0.003
     return turn;
 }

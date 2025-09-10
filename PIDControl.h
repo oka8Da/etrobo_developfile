@@ -11,6 +11,7 @@ public:
 		static const int   bias;
 		float calcPropValue(float diffReflection);
 		float calcPropValue_fast(float diffReflection);//追加(岡田)
+		float calcPropValue_so_fast(float diffReflection);//
 
 		//追加
 		static const float  INITIAL_PREVOUSDIFF_;
